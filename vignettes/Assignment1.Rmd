@@ -1,0 +1,81 @@
+---
+title: "Assignment1"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Assignment1}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(MATH4793CHUAssignment)
+```
+
+# Question 1
+calculate the sample mean, sample variance, and the sample covariance of the measurements(A,B) 
+```{r}
+A <- c(3, 4, 2, 6, 8, 2 ,5)
+B <- c(5, 5.5, 4, 7, 10, 5, 7.5)
+
+paste("the sample mean of A is:", round(mean(A), 4) )
+paste("the sample mean of B is:", round(mean(B), 4) )
+paste("the sample variance sAA is:", round(var(A), 4))
+paste("the sample variance sBB is:", round(var(B), 4))
+unbias_cov <- cov(A,B)
+paste("the unbias covariance sAB is:", round(unbias_cov, 4) )
+bias_cov<- cov(B,A)*(length(A)-1) / length(A)
+paste("the bias covariance sAB is:", round(bias_cov, 4) )
+```
+
+# Question 2
+```{r fig.width=6, fig.height=4}
+# data
+age <- c(1, 2, 3, 3, 4, 5, 6, 8, 9, 11)
+price <- c(18.95, 19.00, 17.95, 15.54, 14.00, 12.95, 8.94, 7.49, 6.00, 3.99)
+# Convert to a data frame
+data <- data.frame(Age = age, Price = price)
+
+# Create a scatter plot
+plot(data$Age, data$Price, main = "Car Age vs Price",
+     xlab = "Age (Years)", ylab = "Price (Thousands of dollars)", pch = 19)
+# Create the marginal dot plot for Age
+plot(age, rep(1, length(age)), xlim = range(age), axes = FALSE, ylab = "", xlab = "",
+     pch = 19, main = "Marginal Dot Plot for Age")
+axis(2, las = 1)
+# Create the marginal dot plot for Price
+plot(rep(1, length(price)), price, ylim = range(price), axes = FALSE, xlab = "", ylab = "",
+     pch = 19, main = "Marginal Dot Plot for Price", xaxt = "n")
+axis(1, las = 1)
+
+
+# means
+mean_x1 <- mean(data$Age)
+mean_x2 <- mean(data$Price)
+
+# variances
+var_x1 <- var(data$Age)
+var_x2 <- var(data$Price)
+
+# covariance
+cov_x1x2 <- cov(data$Age, data$Price)
+
+# correlation coefficient
+corr_x1x2 <- cor(data$Age, data$Price)
+
+# Print the calculated values
+paste("Sample mean for age (x1):", mean_x1, "\n")
+cat("Sample mean for price (x2):", mean_x2, "\n")
+cat("Sample variance for age (s11):", var_x1, "\n")
+cat("Sample variance for price (s22):", var_x2, "\n")
+cat("Sample covariance (s12):", cov_x1x2, "\n")
+cat("Sample correlation coefficient (r12):", corr_x1x2, "\n")
+```
+
+
