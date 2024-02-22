@@ -140,8 +140,6 @@ c(cor(x1, x2), cor(x2, x3), cor(x1, x3)) #correlation coefficient
 ```{r}
 library(ggplot2)
 # data
-sales<- c(108.28, 152.36, 95.04, 65.45, 62.97, 263.99, 265.19, 285.06, 92.01, 165.68) #x1, sales in billions
-profits <- c(17.05, 16.59, 10.91, 14.14, 9.52, 25.33, 18.54, 15.73, 8.10, 11.13) #x2, profits in billions
 data <- data.frame(sales = sales, Profits = profits)
 # 1. Scatter plot
 ggplot(data, aes(x = sales, y = profits))+
@@ -169,10 +167,6 @@ ggplot(data, aes(x = factor(1), y=profits)) +
 
 ## with plot, not ggplot
 ```{r fig.width=7, fig.height=6}
-# data
-sales<- c(108.28, 152.36, 95.04, 65.45, 62.97, 263.99, 265.19, 285.06, 92.01, 165.68) #x1, sales in billions
-profits <- c(17.05, 16.59, 10.91, 14.14, 9.52, 25.33, 18.54, 15.73, 8.10, 11.13) #x2, profits in billions
-
 layout(matrix(c(0, 2, 3, 1), 2, 2, byrow = TRUE), widths = c(1, 4), heights = c(1, 4))
 # 1. scatter plot for x1 and x2
 par(mar = c(5, 4, 2, 2))
@@ -207,9 +201,6 @@ The correlation coefficient between sales and profits is 0.6861, which indicates
 # Question 5 (1.5)
 ## Assets vs Sale, with plot
 ```{r fig.width=7, fig.height=6}
-# data
-assets <- c(1484.10, 750.33, 766.42, 1110.46, 1031.29, 195.26, 193.83, 191.11, 1175.16, 211.15) #x3, assets in billions
-
 layout(matrix(c(0, 2, 3, 1), 2, 2, byrow = TRUE), widths = c(1, 4), heights = c(1, 4))
 # 1. scatter plot for x1 and x3
 par(mar = c(5, 4, 2, 2))
@@ -231,9 +222,6 @@ The diagram does not show the perfect linear relationship, but it appears to be 
 ```{r}
 library(ggplot2)
 # data
-assets <- c(1484.10, 750.33, 766.42, 1110.46, 1031.29, 195.26, 193.83, 191.11, 1175.16, 211.15) #x3, assets in billions
-sales<- c(108.28, 152.36, 95.04, 65.45, 62.97, 263.99, 265.19, 285.06, 92.01, 165.68) #x1, sales in billions
-
 data <- data.frame(sales = sales, assets = assets)
 # 1. Scatter plot
 ggplot(data, aes(x = sales, y = assets))+
@@ -282,10 +270,6 @@ The diagram does not show the perfect linear relationship, but it appears to be 
 ## Assets vs Profits, with ggplot
 ```{r}
 library(ggplot2)
-# data
-assets <- c(1484.10, 750.33, 766.42, 1110.46, 1031.29, 195.26, 193.83, 191.11, 1175.16, 211.15) #x3, assets in billions
-profits <- c(17.05, 16.59, 10.91, 14.14, 9.52, 25.33, 18.54, 15.73, 8.10, 11.13) #x2, profits in billions
-
 data <- data.frame(assets = assets, profits = profits)
 # 1. Scatter plot
 ggplot(data, aes(x = profits, y = assets))+
@@ -311,7 +295,6 @@ ggplot(data, aes(x = factor(1), y=assets)) +
         axis.ticks.x=element_blank())
 ```
 
-
 ```{r}
 c(mean(sales), mean(profits), mean(assets)) #mean
 round(c(var(sales), var(profits), var(assets)), 4)  # unbias variance
@@ -321,7 +304,6 @@ round(c(cov(sales, profits), cov(sales, assets), cov(profits, assets))*(length(s
 round(c(cor(sales, profits), cor(sales, assets), cor(profits, assets)), 4) #correlation coef
 ```
 ![ sample array mean/variance-covriance/correlation ](ASS1-5.jpg){ width=60% }
-
 
 # Question 6 (1.6)
 ```{r}
@@ -419,10 +401,8 @@ round(projection, 4)
 ```
 ![ vector](ASS2-1.jpg){ width=60% }
 
-
 # Question 8 (2.2)
 ![ vector multiplication](ASS2-2.jpg){ width=60% }
-
 
 # Question 9 (2.3)
 ## a
