@@ -1,0 +1,182 @@
+---
+title: "ASS22"
+author: "Chih-Yu"
+date: "2024-03-08"
+output: 
+   html_document:
+    df_print: paged
+    fig_caption: true
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 1 (3.1)
+## a. 2 dimension
+![ ](ass2_Question1a.jpg){ width=60% }
+
+## b.3 dimension
+deviation vector
+```{r}
+x <- matrix(c(9,1,5,3,1,2), nrow=3, byrow=TRUE)
+devivation <- x-matrix(c(1,1,1))%*%colMeans(x)
+devivation
+```
+![](ASS2_Q1.2.jpg){ width=60% }
+
+## c. length and cosine of deviation vectors
+```{r}
+length_1 <- sqrt(sum(devivation[,1]^2))
+length_2 <- sqrt(sum(devivation[,2]^2))
+length_1 
+length_2
+```
+```{r}
+R = cor(x)
+R
+```
+Length of d1 =  5.656854, Length of d2 = 1.414214
+
+We have cosin(d1,d2)=R12 with R is sample correlation coefficient so cosin(d1,d2) is: R12 = -0.5
+
+# Question 2 (3.2)
+## a. 2 dimension
+```{r}
+x <- matrix(c(3,4,6,-2,3,1), nrow=3, byrow=TRUE)
+x
+colMeans(x)
+plot(x,pch=19,col=3,main = "Scatter plot in 2 dimensions",xlab="1",ylab="2")
+points(4,1,col="red",pch=19)
+```
+
+## b.3dimension
+```{r}
+devivation <- x-matrix(c(1,1,1))%*%colMeans(x)
+devivation
+```
+![ ](ASS2_Q22.png){ width=60% }
+
+## c. length and cosine of deviation vectors
+```{r}
+length_1 <- sqrt(sum(devivation[,1]^2))
+length_2 <- sqrt(sum(devivation[,2]^2))
+length_1 
+length_2
+R = cor(x)
+R
+```
+Length of d1 = 2.4494897, Length of d2 = 4.2426407
+
+We have cosin(d1,d2)=R12 with R is sample correlation coefficient so cosin(d1,d2) is: R12 = -0.8660254
+
+
+
+# Question 3 (3.3)
+![](ASS2_Q3.jpg){ width=60% }
+
+
+
+# Question 4 (3.4)
+## a) projection
+```{r}
+library(MATH4793CHUAssignment)
+T1_1$V1
+T1_1$V1 - matrix(c(1,1,1,1,1,1))%*%colMeans(T1_1)
+```
+
+# Question 5 (3.5)
+```{r}
+x1 <- matrix(c(9,1,5,3,1,2), nrow=3, byrow=TRUE)
+cov(x1)
+det(cov(x1))
+x2 <- matrix(c(3,4,6,-2,3,1), nrow=3, byrow=TRUE)
+cov(x2)
+det(cov(x2))
+```
+
+
+# Question 6 (3.6)
+## a. deviation
+```{r}
+x <- matrix(c(-1,3,-2,2,4,2,5,2,3), nrow=3, byrow=TRUE)
+x
+deviation <- x - matrix(c(1,1,1))%*%colMeans(x)
+deviation
+a=deviation%*%matrix(c(1,1,-1),ncol = 1)
+a
+```
+Since first column + second column = -third column, therefore those three column are not linear independent. In other words, the matrix is not full rank.
+
+## b. S and generalized sample variance 
+```{r}
+# Sample Variance-Covariance Matrix S
+S <- cov(x)
+S
+det(S)
+```
+
+The determine of S is close to 0 (consider as 0). This suggest that there is a least one dependent column in the data. In other words, the matrix is not full rank. The result is same as part a.
+
+## c. total sample variance
+```{r}
+sum(diag(S))
+```
+# Question 7 (3.7)
+```{r}
+A <- matrix(c(5,4,4,5), nrow = 2, byrow=TRUE)
+B <- matrix(c(5,-4,-4,5), nrow = 2, byrow=TRUE)
+C <- matrix(c(3,0,0,3), nrow = 2, byrow=TRUE)
+eigen(A)
+acos(0.7071068)*(180/pi)
+eigen(B)
+acos(-0.7071068)*(180/pi)
+eigen(C)
+acos(0)*(180/pi)
+```
+![](ASS2_Q7.jpg){ width=60% }
+
+# Question 8 (3.8)
+```{r}
+S1 <- matrix(c(1, 0, 0,
+               0, 1, 0,
+               0, 0, 1), nrow = 3, byrow = TRUE)
+
+S2 <- matrix(c(1, -1/2, -1/2,
+               -1/2, 1, -1/2,
+               -1/2, -1/2, 1), nrow = 3, byrow = TRUE)
+```
+## a.toal sample variance
+```{r}
+variance1 <- sum(diag(S1))
+variance2 <- sum(diag(S2))
+variance1
+variance2
+```
+
+S1 and S2 have the sample total sample variance
+
+## b. generalize sample variance
+```{r}
+det(S1)
+det(S2)
+```
+For S1, since its generalize sample variance = 1, it mean that the column are independent to each other.
+For S2, since its generalize sample variance = 0, it mean that the column is not completely independence, at least one is dependent
+
+# Question 9 (3.9)
+# Question 10 (3.10)
+# Question 11 (3.11)
+# Question 12 (3.12)
+# Question 13 (3.13)
+# Question 14 (3.14)
+# Question 15 (3.15)
+# Question 16 (4.1)
+![ ](Q41.jpg){ width=60% }
+# Question 17 (4.2)
+
+
+

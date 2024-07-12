@@ -1,0 +1,147 @@
+---
+title: "ASS3"
+author: "Chih-Yu"
+date: "2024-03-25"
+output: 
+ html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Done: 10/10
+
+# Question 1 (4.3)
+
+$$
+X \tilde\ N_3(\mu, \Sigma)
+$$
+
+$$
+\mu' = [-3, 1, 4]
+$$
+
+$$
+\Sigma = \begin{bmatrix}
+    1 & -2 & 0 \\
+    -2 & 5 & 0 \\
+    0 & 0 & 2
+\end{bmatrix} = \begin{bmatrix}
+    \sigma_{11} & \sigma_{12} & \sigma_{13} \\
+    \sigma_{21} & \sigma_{22} & \sigma_{23} \\
+    \sigma_{31} & \sigma_{32} & \sigma_{33}
+\end{bmatrix}
+$$
+
+## a) x1 and x2
+
+Dependent! Since the covariance of x1 and x2 is -2, not 0 ($\sigma_{12} = \sigma_{21} = -2$), so x1 and x2 are dependent.
+
+## b) x2 and x3
+
+Independent! Since the covariance of x2 and x3 is 0 ($\sigma_{23} = \sigma_{32} = 0$), so x2 and x3 are independent.
+
+## c) (x1, x2) and x3
+
+Independent! since the covariance of (x1, x2) and x3 is 0 ($\sigma_{13} = \sigma_{31} = \sigma_{23} = \sigma_{32} = 0$), so (x1, x2) and x3 are independent
+
+## d) (x1+x2)/2 and x3
+
+![Independent](Q43.jpg){width="92%"}
+
+## e) x2 and (x2-5/2x1-x3)
+
+![Dependent!](Q43e.jpg){width="60%" height="60%"}
+
+# Question 2 (4.4)
+
+![New distribution and independent](Q44.jpg){width="82%"}
+
+# Question 3 (4.5)
+
+## a) X1\|x2=x2
+
+![conditional distribution](Q45a.jpg){width="60%" height="60%"}
+
+## b) X2\|X1=x1, X3=x3
+
+![conditional distribution](Q45b.jpg){width="60%" height="60%"}
+
+## b) X3\|X1=x1, X2=x2
+
+![conditional distribution](Q45c.jpg){width="60%" height="60%"}
+
+# Question 4 (4.6)
+
+$$
+X \tilde\ N_3(\mu, \Sigma)
+$$
+
+$$
+\mu' = [1, -1, 2]
+$$
+
+$$
+\Sigma = \begin{bmatrix}
+    \sigma_{11} & \sigma_{12} & \sigma_{13} \\
+    \sigma_{21} & \sigma_{22} & \sigma_{23} \\
+    \sigma_{31} & \sigma_{32} & \sigma_{33}
+\end{bmatrix} = \begin{bmatrix}
+    4 & 0 & -1 \\
+    0 & 5 & 0 \\
+    -1 & 0 & 2
+\end{bmatrix} 
+$$
+
+## a) x1 and x2
+
+Independent! Since the covariance of x1 and x2 is 0 ($\sigma_{12} = \sigma_{21} = 0$), so x1 and x2 are independent.
+
+## b) x1 and x3
+
+Dependent! Since the covariance of x1 and x3 is -1, not 0 ($\sigma_{13} = \sigma_{31} = -1$), so x1 and x3 are dependent.
+
+## c) x2 and x3
+
+Independent! Since the covariance of x2 and x3 is 0 ($\sigma_{23} = \sigma_{32} = 0$), so x2 and x3 are independent.
+
+## d) (x1, x3) and x2
+
+Independent! since the covariance of (x1, x3) and x2 is 0 ($\sigma_{12} = \sigma_{21} = \sigma_{23} = \sigma_{32} = 0$), so (x1, x3) and x2 are independent
+
+## e) x1 and (x1+3x2-2x3)
+
+![Dependent!](Q46e.jpg){width="60%" height="60%"}
+
+# Question 5 (4.7)
+
+## a) X3=x3
+
+![conditional distribution](Q47a.jpg){width="60%" height="60%"}
+
+## b) X2=x2, X3=x3
+
+![conditional distribution](Q47b.jpg){width="60%" height="60%"}
+
+# Question 6 (4.8)
+
+![(bivariate) normal distribution](Q48.jpg){width="60%" height="60%"}
+
+# Question 7 (4.9)
+
+![prove](Q49.jpg){width="70%" height="70%"}
+
+# Question 8 (4.10)
+
+![prove](Q410.jpg){width="70%" height="70%"}
+
+# Question 9 (4.11)
+
+![prove](Q411.jpg){width="70%" height="70%"}
+
+# Question 10 (4.12)
+
+![prove](Q412.jpg){width="70%" height="70%"}

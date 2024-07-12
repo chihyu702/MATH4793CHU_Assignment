@@ -1,0 +1,257 @@
+---
+title: "ASS4"
+author: "Chih-Yu"
+date: "2024-04-15"
+output: 
+ html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Task list  
+
+## Question 1 (8.1)
+```{r}
+s <- matrix( c(5,2,2,2), nrow = 2, byrow=TRUE)
+pca <- princomp(covmat=s)
+summary(pca)
+```
+85.71% of the population variance is explained by the first principal component.
+
+```{r}
+pca$loadings
+```
+$Y_1 = 0.894X_1 + 0.447X_2$   
+$Y_2 = 0.447X_1 - 0.894X_2$
+
+## Question 2(8.2)
+### a. correlation matrix p
+```{r}
+# convert covariance matrix to correlation matrix
+d = sqrt(diag(s))
+D <- diag(d)
+# find inverse of D
+# same as same as matrix(c(d[1], 0, 0, d[2]), nrow = 2, byrow=TRUE)
+Dinv <- solve(D)
+p <- Dinv %*% s %*% Dinv
+round(p, 4)
+# the whole thing is same as cov2cor(s)
+```
+#### method 1
+```{r}
+eigen(p)
+proportion<- eigen(p)$value[1] / sum(eigen(p)$value)
+proportion
+```
+
+#### method 2
+```{r}
+pc <- princomp(covmat = p, cor = TRUE)
+pc$loading
+summary(pc)
+```
+Two method show the same result. 81.62% of the population variance is explained by the first principal component.   
+$Y_1 = 0.707X_1 + 0.707X_2$   
+$Y_2 = 0.707X_1 - 0.707X_2$
+
+### b. compare teh result
+The result are different. It is because they are obtain from the different linear transformation matrix (cor and cov). However, they indeed represent the same underlying data set.
+
+
+### c. correlation
+```{r}
+p11 <- pc$loading[1,1] * sqrt(eigen(p)$value[1])
+round(p11, 4)
+
+p12 <- pc$loading[1,2] * sqrt(eigen(p)$value[1])
+round(p12, 4)
+
+p21 <- pc$loading[2,1] * sqrt(eigen(p)$value[2])
+round(p21, 4)
+```
+![](ASS82.jpg){width="50%" height="50%"}
+
+## Question 3 (8.3)
+```{r}
+S <- matrix( c(2,0,0,
+               0,4,0,
+               0,0,4), nrow=3, byrow= TRUE)
+eigen(S)
+```
+![](ASS83.png){width="60%" height="60%"}
+
+the principle components are: Y1=X1, Y2=X2, Y3=X3. Since Y3 and X3 have the same eigenvalue, they will be correlated
+              
+              
+              
+              
+              
+              
+## Question 5 (8.5)
+### a
+![](ASS85a.jpg){width="60%" height="60%"}
+
+### b
+![](ASS85b.jpg){width="60%" height="60%"}
+
+## Question 6 (8.6)
+```{r}
+x1 <- MATH4793CHUAssignment::sales
+x2 <- MATH4793CHUAssignment::profits
+
+x<-matrix(c(x1, x2), byrow=FALSE)
+
+Xmean <- matrix(c(155.60, 14.7), nrow=2, byrow=TRUE)
+Xmean
+
+Xcov <- matrix(c(7476.45,303.62, 303.62, 26.19), nrow=2, byrow=TRUE)
+Xcov
+```
+### a. principle component
+
+```{r}
+e<-eigen(Xcov)
+e
+```
+$\bar{y_1} = \bar{\lambda_1} = 7488.80293 $;  $Y_1 = -0.9991X_1 + 0.04065X_2$   
+$\bar{y_2} = \bar{\lambda_2} = 13.83707$;  $Y_2 = -0.04065X_1 - 0.9991X_2$
+
+### b. proportion
+```{r}
+y <- prcomp(Xcov)
+summary(y)
+p<- 7488.80293/(7488.80293+13.83707)
+p
+```
+99.81557% can be explain by the first principle component
+
+### c. density elliose
+```{r}
+Sinv <- solve(Xcov)
+Sinv 
+```
+
+```{r}
+FactoMineR::PCA(x,scale.unit = FALSE)
+```
+The first principle compontent will explain for almost 99% of the variables
+
+### d. correlation
+```{r}
+j <- nrow(eigen(Xcov)$vector)
+ri <- sqrt(diag(Xcov))
+corre <- sapply(1:j, function(k) {
+  eigen(Xcov)$vector[k, 1] * sqrt(eigen(Xcov)$value[1]) / ri[k]
+})
+corre[1]
+corre[2]
+```
+
+## Question 7 (8.7)
+## a. principle components
+```{r}
+Xcor <- cov2cor(Xcov)
+Xcor
+
+eigen(Xcor)
+```
+```{r}
+pp<- princomp(covmat = Xcor)
+pp$loading
+```
+
+
+### b. 
+```{r}
+1.6861434/(1.6861434+0.3138566)
+```
+the first principle component could explain 84.31% of the variance/
+
+###c.
+```{r}
+l<-princomp(covmat = Xcor)$loading
+cor11 <- l[1, 1]
+cor21 <- l[2, 1]
+cor11 
+cor21
+```
+
+
+## Question 8 (8.8)
+
+## Question 9 (8.10)
+### a. cov matrix and principal components
+```{r}
+x <- read.table("T8-4.dat")
+#  construct the sample covariance matrix 
+S <- cov(x)
+S
+# principal components
+pcaX <- prcomp(x, scale = FALSE)
+summary(pcaX)
+pcaX$rotation
+```
+
+### b.proportion of the first three
+```{r}
+pro<-princomp(x, cor = FALSE)
+pro
+summary(pro)
+```
+
+The first comp. could explain 52.93% of the variables; the second comp. could explain 27.13% of the variables; the third comp. could explain 9.82% of variables. 89.88% of the total variances could be explained by the first three comp.
+
+### c. 90% confidence interval
+```{r}
+# using 8-33
+# get lambda
+eigen(S)$value
+# 90% ci, get alpha
+alpha = 0.1
+# n = total num of observation
+n <- nrow(x)
+# p = num of variable
+p <- length(x)
+ci <- matrix(nrow=2, ncol=p)
+for (i in 1:p){
+  z <- qnorm(1 - alpha/(2) )
+  # calculate ci with 8-33
+  upper <- eigen(S)$value[i]/(1-z*sqrt(2/n))
+  lower <- eigen(S)$value[i]/(1+z*sqrt(2/n))
+  ci[1,i] <- upper
+  ci[2,i] <- lower
+}
+rownames(ci) <- c("Upper Bound", "Lower Bound")
+ci
+```
+
+### d. summarzie
+Yes, it can be explain with 3 principle component. It is mainly because the first three can explain about 90% of the variance. 
+
+```{r}
+screeplot(pcaX, col = "red", pch = 16,type = "lines") 
+```
+
+
+## Question 10 (8.11)
+### a.
+```{r}
+x <- read.table("T8-5.dat")
+so<-cov(x)
+so
+```
+### b. 
+```{r}
+eigen(so)
+```
+
+### c.
+```{r}
+po<-princomp(x, cor = FALSE)
+summary(po)
+```
+
